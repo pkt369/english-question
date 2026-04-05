@@ -5,32 +5,50 @@ on:
     branches:
       - master
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/english-questions-frontend
+
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          node-version: 22
-          cache: npm
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Debug info
-        run: |
-          node -v && npm -v
-          git status
-          grep -n "@emnapi/core\|@emnapi/runtime" package-lock.json || true
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=
+            type=raw,value=latest
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Build
-        run: npm run build
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
 
+    steps:
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
@@ -38,8 +56,17 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -p ${{ secrets.SSH_PORT || 22 }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy via rsync
+      - name: Deploy via SSH
         run: |
-          rsync -avz --delete \
-            -e "ssh -p ${{ secrets.SSH_PORT || 22 }}" \
-            dist/ root@${{ secrets.SSH_HOST }}:/srv/english.datasurfing.app/
+          ssh -p ${{ secrets.SSH_PORT || 22 }} root@${{ secrets.SSH_HOST }} << 'EOF'
+            docker pull ghcr.io/${{ github.repository_owner }}/english-questions-frontend:latest
+            docker stop english-questions-frontend || true
+            docker rm english-questions-frontend || true
+            docker run -d \
+              --name english-questions-frontend \
+              --restart unless-stopped \
+              -v /srv/english-questions-frontend/nginx-log:/var/log/nginx \
+              -p 127.0.0.1:10000:80 \
+              ghcr.io/${{ github.repository_owner }}/english-questions-frontend:latest
+            docker image prune -f
+          EOF
