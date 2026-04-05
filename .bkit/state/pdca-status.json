@@ -1,0 +1,175 @@
+{
+  "version": "3.0",
+  "lastUpdated": "2026-04-03T15:19:52.556Z",
+  "activeFeatures": [
+    "english-question",
+    "data"
+  ],
+  "primaryFeature": "english-question",
+  "features": {
+    "english-question": {
+      "phase": "act",
+      "phaseNumber": 5,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-03T15:01:30.207Z",
+        "lastUpdated": "2026-04-03T15:19:52.555Z"
+      },
+      "lastFile": "/Users/sejun/project/english-question/src/App.tsx",
+      "previousPhase": "check",
+      "autoAdvanced": true
+    },
+    "data": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-04-03T15:04:16.078Z",
+        "lastUpdated": "2026-04-03T15:06:48.189Z"
+      },
+      "lastFile": "/Users/sejun/project/english-question/src/data/index.ts"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-04-03T12:57:17.021Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-04-03T15:19:52.556Z"
+  },
+  "history": [
+    {
+      "timestamp": "2026-04-03T15:01:30.208Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:01:45.139Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:01:50.978Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:01:57.337Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:02:03.174Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:02:12.741Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:02:19.531Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:02:33.302Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:02:39.438Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:02:51.391Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:03:01.711Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:03:16.998Z",
+      "feature": "english-question",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:04:16.078Z",
+      "feature": "data",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:05:02.222Z",
+      "feature": "data",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:05:52.072Z",
+      "feature": "data",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:06:43.050Z",
+      "feature": "data",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:06:48.189Z",
+      "feature": "data",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-03T15:19:52.556Z",
+      "feature": "english-question",
+      "phase": "act",
+      "action": "updated"
+    }
+  ],
+  "stateMachine": {
+    "defaultWorkflow": "default",
+    "activeWorkflows": {},
+    "totalTransitions": 0
+  },
+  "automation": {
+    "globalLevel": 2,
+    "trustScore": 40,
+    "pendingApprovals": 0,
+    "lastGateResult": null
+  },
+  "team": {
+    "enabled": true,
+    "stateFile": ".bkit/runtime/agent-state.json",
+    "eventsFile": ".bkit/runtime/agent-events.jsonl"
+  }
+}
